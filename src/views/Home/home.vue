@@ -49,7 +49,20 @@
       <div class="pub_right_content">
         <div class="main">
           <welcome v-if="full == '/'" />
-          <router-view></router-view>
+          <div v-else class="main_menu">
+            <div
+              v-for="(row,k) in  showmenus "
+              :key="k"
+              :class="[row.link == ontive ? 'main_nav_active':'','nav']"
+            >
+              <span @click="tz(row.link)">{{row.name}}</span>
+              <i class="el-icon-close" @click="delenav(row.link)"></i>
+            </div>
+            <div class="fg"></div>
+          </div>
+          <div class="main_content">
+             <router-view></router-view>
+          </div>
         </div>
       </div>
     </div>
@@ -68,13 +81,59 @@ export default {
         index: 0,
         father_index: 0,
         jb: 1
-      }
+      },
+      topMenus: [],
+      ontive: ""
     };
   },
   components: {
     Welcome
   },
   methods: {
+    delenav(val) {
+      let arr = this.topMenus;
+      let index = arr.findIndex((v, i) => {
+        if (val == v) {
+          return true;
+        }
+      });
+      if (index != -1) {
+        this.topMenus.splice(index, 1);
+        if (this.ontive == val) {
+          let length = this.topMenus.length;
+          if (length > 0) {
+            this.tz(this.topMenus[length - 1]);
+          } else {
+            this.tz("home");
+          }
+        }
+      }
+    },
+    //记录菜单打开
+    addtopmenu(val) {
+      let arr = this.topMenus;
+      let index = arr.findIndex(function(v, k) {
+        if (val == v) {
+          return true;
+        }
+      });
+      if (index == -1) {
+        arr.push(val);
+      } else {
+      }
+      this.topMenus = arr;
+    },
+    tz(link) {
+      console.log(link);
+      this.$router.push({
+        name: link
+      });
+      this.activeMenu = {
+        index: "",
+        jb: ""
+      };
+      this.ontive = link;
+    },
     //  以下是事件函数
     //点击父菜单
     Menu1(index) {
@@ -100,6 +159,8 @@ export default {
             index: index,
             jb: 1
           };
+          this.addtopmenu(btn.link);
+          this.ontive = btn.link;
         }
       }
     },
@@ -114,6 +175,8 @@ export default {
           father_index: fatherindex,
           jb: 2
         };
+        this.addtopmenu(link);
+        this.ontive = link;
       }
     },
     //开关左侧菜单栏
@@ -223,6 +286,8 @@ export default {
   },
   mounted() {
     let querypath = this.$route.name;
+    this.addtopmenu(this.$route.name);
+    this.ontive = this.$route.name;
     for (let i = 0, j = this.Menus.length; i < j; i++) {
       if (this.Menus[i].link == querypath) {
         this.activeMenu = {
@@ -248,14 +313,85 @@ export default {
       }
     }
   },
+  watch: {},
   computed: {
     full() {
       return this.$route.fullPath;
+    },
+    showmenus() {
+      let arr = this.topMenus;
+      let data = [];
+      for (let i = 0; i < arr.length; i++) {
+        let index = this.menus.findIndex((v, k) => {
+          if (v.link == arr[i]) {
+            return true;
+          }
+        });
+        if (index != -1) {
+          data.push(this.menus[index]);
+        }
+      }
+      return data;
+    },
+    menus() {
+      let data = [];
+      let navs = this.$pubfn.navs;
+      for (let i = 0; i < navs.length; i++) {
+        if (navs[i]["second"]) {
+          for (let j = 0; j < navs[i]["second"].length; j++) {
+            data.push(navs[i]["second"][j]);
+          }
+        } else {
+          data.push(navs[i]);
+        }
+      }
+      return data;
     }
   }
 };
 </script>
 <style scoped lang="scss" >
+.main_menu {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  position: absolute;
+  top:0px;
+  left: 0px;
+  .nav {
+    line-height: 1;
+    float: left;
+    padding: 12px 25px;
+    border-right: 1px solid rgb(228, 228, 228);
+    border-bottom: 1px solid rgb(228, 228, 228);
+    font-size: 14px;
+    position: relative;
+    span {
+      color: #444444;
+      cursor: pointer;
+      &:hover {
+        color: #007df1;
+      }
+    }
+    i {
+      position: absolute;
+      right: 3px;
+      top: 3px;
+      color: #c9c9c9;
+      cursor: pointer;
+      &:hover {
+        color: rgb(116, 116, 116);
+      }
+    }
+  }
+  .fg {
+    flex: 1;
+    border-bottom: 1px solid rgb(228, 228, 228);
+  }
+}
+.main_nav_active {
+  border-bottom: none !important;
+}
 #main {
   width: 100%;
   height: 100%;
@@ -263,7 +399,7 @@ export default {
 }
 .pub_left {
   overflow: hidden;
-  background: #213242;
+  background: #0e161f;
   transition: width 0.3s;
   -moz-transition: width 0.3s;
   -webkit-transition: width 0.3s;
@@ -289,13 +425,19 @@ export default {
   overflow-y: auto;
 }
 .main {
-  width: calc(100% - 40px);
-  height: calc(100% - 50px);
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
   margin: 0 auto;
   margin-top: 10px;
   background: white;
-  padding: 10px 10px 30px 10px;
-  overflow-y: auto;
+  position: relative;
+  border-top: 1px solid white;
+  &_content{
+    margin-top: 50px;
+    width: 100%;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+  }
 }
 .pub_right_header_menu {
   position: absolute;
