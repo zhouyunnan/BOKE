@@ -12,8 +12,8 @@
         </el-form-item>
         <el-form-item>
           <el-row type="flex" justify="space-between">
-            <el-checkbox style="color:#eee">{{('记住密码')}}</el-checkbox>
-            <a href style="color:#eee">{{('忘记密码')}}</a>
+            <el-checkbox>{{('记住密码')}}</el-checkbox>
+            <a href >{{('忘记密码')}}</a>
           </el-row>
         </el-form-item>
 
@@ -22,7 +22,7 @@
         </el-form-item>
       </el-form>
     </div>
-      <vue-particles
+      <!-- <vue-particles
         color="#fff"
         :particleOpacity="0.7"
         :particlesNumber="60"
@@ -39,7 +39,7 @@
         :clickEffect="true"
         clickMode="push"
         class="lizi"
-      ></vue-particles>
+      ></vue-particles> -->
    
   </div>
 </template>
@@ -84,7 +84,7 @@ export default {
         return;
       }
       this.dnzt = true;
-      this.$http
+      this.$httpajax
         .post(
           "/app.php/home/login/Api_LandingVerification",
           this.$qs.stringify({
@@ -139,14 +139,17 @@ export default {
 }
 .login-wrap {
   position: absolute;
-  right: 5%;
-  width: 330px;
+  // right: 5%;
+  width:30vw;
   border-radius: 10px;
   padding: 20px;
   z-index: 3;
-  bottom: 20%;
-  padding-bottom: 100px;
-  background: rgba(70, 70, 70, 0.3);
+  left: 50%;
+  margin-left: -15vw;
+  top:30vh;
+  // bottom: 20%;
+ // background: rgba(70, 70, 70, 0.3);
+  background: white;
   &::after {
     content: "";
     width: 100%;
@@ -155,7 +158,7 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    background: rgba(70, 70, 70, 0.3);
+    // background: rgba(70, 70, 70, 0.3);
     filter: blur(6px);
     z-index: -1;
   }
@@ -164,7 +167,7 @@ export default {
   }
   h3 {
     text-align: center;
-    color: #ebedef;
+    color: #222324;
     margin-top: 0px;
     margin-bottom: 5px;
     span {

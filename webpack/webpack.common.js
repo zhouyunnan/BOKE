@@ -14,12 +14,10 @@ module.exports = {
         new VueLoaderPlugin(),
     ],
     module: {
-        rules: [
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader'
-            }
-        ]
+        rules: [{
+            test: /\.vue$/,
+            loader: 'vue-loader'
+        }]
     },
     //移出重复模块
     optimization: {
@@ -34,8 +32,9 @@ module.exports = {
         }
     },
     //采用cdn的方式引用依赖
-     externals: {
+    externals: {
         'vue': 'Vue',
-        'element-ui': 'ELEMENT'
+        'element-ui': 'ELEMENT',
+        "oss": "OSS"
     }
 };

@@ -8,8 +8,7 @@ module.exports = merge(common, {
         path: path.resolve(__dirname, '../dist')
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.(scss|css)$/,
                 use: [
                     'vue-style-loader',
@@ -35,8 +34,8 @@ module.exports = merge(common, {
         hot: true,
         proxy: {
             '/api': {
-                target: 'https://api.doudianwang.com/admin/',
-                changeOrigin: true,// target是域名的话，需要这个参数，
+                target: 'http://172.26.219.205/tp3',
+                changeOrigin: true, // target是域名的话，需要这个参数，
                 ws: true, //是否代理
                 pathRewrite: { //将开头的api除掉  路径重写
                     '^/api': ''
@@ -44,5 +43,5 @@ module.exports = merge(common, {
             }
         }
     },
-    devtool: 'inline-source-map',//跟踪错误
+    devtool: 'inline-source-map', //跟踪错误
 });

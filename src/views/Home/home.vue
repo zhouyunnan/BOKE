@@ -18,7 +18,7 @@
               v-if="menu.second"
               :class="[menu.isopen?'pub_zt_b':'pub_zt_r']"
             >
-              <span class="iconfont icon-shangjiantou"></span>
+              <i class="el-icon-arrow-up"></i>
             </div>
           </div>
           <div class="pub_left_menu_last_menu" :style="{height:menu.height+'px'}">
@@ -35,14 +35,14 @@
     <div class="pub_right">
       <div class="pub_right_header">
         <div class="pub_right_header_menu">
-          <span @click="changeMenu()" class="iconfont icon-caidan"></span>
+          <i @click="changeMenu()" class="el-icon-menu"></i>
         </div>
         <div class="pub_right_header_menu_r">
           <div class="pub_right_header_ty" @click="exitlogin()">
             <span class="iconfont icon-tuichu"></span>退出登陆
           </div>
           <div class="pub_right_header_ty" @click="changgepwd()">
-            <span class="iconfont icon-shezhi"></span>修改密码
+            <i class="el-icon-lock"></i>修改密码
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@ export default {
     },
     //退出登陆ajax
     doexit() {
-      this.$http
+      this.$httpajax
         .get("/app.php/home/login/Api_exit")
         .then(response => {
           let re = response.data;
@@ -294,7 +294,7 @@ export default {
   margin: 0 auto;
   margin-top: 10px;
   background: white;
-  padding: 0px 10px 30px 10px;
+  padding: 10px 10px 30px 10px;
   overflow-y: auto;
 }
 .pub_right_header_menu {
@@ -303,7 +303,7 @@ export default {
   transform: translateY(-50%);
   left: 15px;
 }
-.pub_right_header_menu span {
+.pub_right_header_menu i {
   font-size: 26px;
   cursor: pointer;
 }
@@ -318,7 +318,7 @@ export default {
   margin-right: 20px;
   font-size: 16px;
 }
-.pub_right_header_ty span {
+.pub_right_header_ty i {
   padding-right: 4px;
 }
 
@@ -347,7 +347,7 @@ export default {
   margin-left: 24px;
   margin-right: 15px;
 }
-.pub_left_menu_li_ico span {
+.pub_left_menu_li_ico i {
   font-size: 16px;
   color: #d9dadb;
 }
@@ -358,7 +358,7 @@ export default {
   margin-right: 30px;
   color: #d9dadb;
 }
-.pub_left_menu_li_more span {
+.pub_left_menu_li_more i {
   font-size: 8px;
   color: #d9dadb;
 }
