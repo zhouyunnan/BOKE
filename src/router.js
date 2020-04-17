@@ -33,6 +33,12 @@ let router = new Router({
                     component: () =>
                         import ("./views/types/typeImg.vue"),
                 },
+                {
+                    path: "album",
+                    name: "album",
+                    component: () =>
+                        import ("./views/album/index.vue"),
+                },
             ],
             //是否需要登陆授权
             meta: { requiresAuth: true },

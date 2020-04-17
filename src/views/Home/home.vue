@@ -54,9 +54,10 @@
               v-for="(row,k) in  showmenus "
               :key="k"
               :class="[row.link == ontive ? 'main_nav_active':'','nav']"
+              @click="tz(row.link)"
             >
-              <span @click="tz(row.link)">{{row.name}}</span>
-              <i class="el-icon-close" @click="delenav(row.link)"></i>
+              <span >{{row.name}}</span>
+              <i class="el-icon-close" @click.stop="delenav(row.link)"></i>
             </div>
             <div class="fg"></div>
           </div>
@@ -124,7 +125,6 @@ export default {
       this.topMenus = arr;
     },
     tz(link) {
-      console.log(link);
       this.$router.push({
         name: link
       });
@@ -366,6 +366,7 @@ export default {
     border-bottom: 1px solid rgb(228, 228, 228);
     font-size: 14px;
     position: relative;
+      cursor: pointer;
     span {
       color: #444444;
       cursor: pointer;
@@ -378,7 +379,6 @@ export default {
       right: 3px;
       top: 3px;
       color: #c9c9c9;
-      cursor: pointer;
       &:hover {
         color: rgb(116, 116, 116);
       }

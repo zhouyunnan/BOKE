@@ -17,7 +17,7 @@ export default {
         {
             name: "相册管理",
             icon: "iconfont iconfenlei",
-            link: "type",
+            link: "album",
         },
         {
             name: "代码管理",
