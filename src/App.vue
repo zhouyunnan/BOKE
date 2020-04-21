@@ -110,4 +110,7 @@ body {
   top:50%;
   transform:translate(-50%,-200%);
 }
+.avue-crud__color{
+    margin: 0 auto !important;
+}
 </style>

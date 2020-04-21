@@ -20,26 +20,31 @@ let router = new Router({
             path: "/",
             name: "home",
             component: () =>
-                import ("./views/Home/home.vue"),
+                import("./views/Home/home.vue"),
             children: [{
-                    path: "typeWz",
-                    name: "type_wz",
-                    component: () =>
-                        import ("./views/types/typeWz.vue"),
-                },
-                {
-                    path: "typeImg",
-                    name: "type_img",
-                    component: () =>
-                        import ("./views/types/typeImg.vue"),
-                },
-                {
-                    path: "album",
-                    name: "album",
-                    component: () =>
-                        import ("./views/album/index.vue"),
-                },
-            ],
+                path: "typeWz",
+                name: "type_wz",
+                component: () =>
+                    import("./views/types/typeWz.vue"),
+            },
+            {
+                path: "typeImg",
+                name: "type_img",
+                component: () =>
+                    import("./views/types/typeImg.vue"),
+            },
+            {
+                path: "album",
+                name: "album",
+                component: () =>
+                    import("./views/album/index.vue"),
+            },{
+                path: "label",
+                name: "label",
+                component: () =>
+                    import("./views/label/index.vue"),
+            },
+            ], 
             //是否需要登陆授权
             meta: { requiresAuth: true },
         },
@@ -48,7 +53,7 @@ let router = new Router({
             path: "/login",
             name: "login",
             component: () =>
-                import ("./views/Login/login.vue"),
+                import("./views/Login/login.vue"),
         },
 
         //404
@@ -56,13 +61,13 @@ let router = new Router({
             path: "*",
             name: "nofound",
             component: () =>
-                import ("./views/Public/nofound.vue"),
+                import("./views/Public/nofound.vue"),
         },
     ],
 });
 
 //验证是否登陆函数
-let Verification_login = function(to, from, next) {
+let Verification_login = function (to, from, next) {
     instance.axios
         .get("/app.php/home/login/Api_Verification")
         .then((response) => {

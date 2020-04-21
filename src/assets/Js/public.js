@@ -42,7 +42,7 @@ export default {
         {
             name: "标签云",
             icon: "iconfont iconfenlei",
-            link: "type",
+            link: "label",
         },
         {
             name: "友情链接",

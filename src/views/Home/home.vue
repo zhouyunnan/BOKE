@@ -56,13 +56,13 @@
               :class="[row.link == ontive ? 'main_nav_active':'','nav']"
               @click="tz(row.link)"
             >
-              <span >{{row.name}}</span>
+              <span>{{row.name}}</span>
               <i class="el-icon-close" @click.stop="delenav(row.link)"></i>
             </div>
             <div class="fg"></div>
           </div>
           <div class="main_content">
-             <router-view></router-view>
+            <router-view></router-view>
           </div>
         </div>
       </div>
@@ -313,7 +313,11 @@ export default {
       }
     }
   },
-  watch: {},
+  watch: {
+    $route(to, from) {
+      this.ontive = to.name;
+    }
+  },
   computed: {
     full() {
       return this.$route.fullPath;
@@ -356,7 +360,7 @@ export default {
   margin-bottom: 20px;
   display: flex;
   position: absolute;
-  top:0px;
+  top: 0px;
   left: 0px;
   .nav {
     line-height: 1;
@@ -366,7 +370,7 @@ export default {
     border-bottom: 1px solid rgb(228, 228, 228);
     font-size: 14px;
     position: relative;
-      cursor: pointer;
+    cursor: pointer;
     span {
       color: #444444;
       cursor: pointer;
@@ -379,8 +383,11 @@ export default {
       right: 3px;
       top: 3px;
       color: #c9c9c9;
+      padding: 2px;
+      line-height: 1;
       &:hover {
-        color: rgb(116, 116, 116);
+        background: rgb(167, 164, 164);
+        border-radius: 10px;
       }
     }
   }
@@ -432,7 +439,7 @@ export default {
   background: white;
   position: relative;
   border-top: 1px solid white;
-  &_content{
+  &_content {
     margin-top: 50px;
     width: 100%;
     height: calc(100% - 50px);

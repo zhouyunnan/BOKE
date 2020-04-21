@@ -37,7 +37,7 @@ export default {
             ]
           },
           {
-            label: "文章数量",
+            label: "图片数量",
             prop: "number",
             disabled: true,
             addDisplay: false,
@@ -50,18 +50,18 @@ export default {
             dicData: [
               {
                 label: "否",
-                value: 0
+                value: "0"
               },
               {
                 label: "是",
-                value: 1
+                value: "1"
               }
             ],
             formatter: function(row, value, label, column) {
-              if (row.show == 1) {
+              if (row.show == "1") {
                 return "是";
               }
-              if (row.show == 0) {
+              if (row.show == "0") {
                 return "否";
               }
             }
