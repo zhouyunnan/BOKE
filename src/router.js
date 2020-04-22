@@ -38,13 +38,28 @@ let router = new Router({
                 name: "album",
                 component: () =>
                     import("./views/album/index.vue"),
-            },{
+            }, {
                 path: "label",
                 name: "label",
                 component: () =>
                     import("./views/label/index.vue"),
+            },{
+                path: "activeadd",
+                name: "activeadd",
+                component: () =>
+                    import("./views/active/add.vue"),
+            },{
+                path: "activelist",
+                name: "activelist",
+                component: () =>
+                    import("./views/active/list.vue"),
+            },{
+                path: "links",
+                name: "links",
+                component: () =>
+                    import("./views/links/index.vue"),
             },
-            ], 
+            ],
             //是否需要登陆授权
             meta: { requiresAuth: true },
         },

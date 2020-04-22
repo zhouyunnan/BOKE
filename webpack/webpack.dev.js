@@ -41,7 +41,8 @@ module.exports = merge(common, {
                     '^/api': ''
                 }
             }
-        }
+        },
+        disableHostCheck: true
     },
     devtool: 'inline-source-map', //跟踪错误
 });
